@@ -1,61 +1,13 @@
-// src/components/EditTable.tsx
 import React from 'react';
-import styled from 'styled-components';
 
-const TableContainer = styled.div`
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: red;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TableHeader = styled.thead`
-  background-color: black;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: grey;
-  }
-`;
-
-const TableCell = styled.td`
-  padding: 5px; 
-  border: 1px solid #ddd;
-  text-align: center;
-  justify-content: center;
-  font-size: 13px;
-`;
-
-const EditButton = styled.button`
-  background-color: grey;
-  color: #fff;
-  border: none;
-  padding: 3px 10px; /* Added 3px padding */
-  cursor: pointer;
-  margin-right: 5px;
-`;
-
-interface EditTableProps {
-  data: any[];
-  setData: React.Dispatch<React.SetStateAction<any[]>>;
-}
-
-const EditTable: React.FC<EditTableProps> = ({ data, setData }) => {
+const EditTable = ({ data, setData }) => {
   if (!Array.isArray(data)) {
     console.error('data is not an array:', data);
     return <div>No data to display.</div>;
   }
 
-  const handleEdit = (id: string, field: string, newValue: string | number | boolean) => {
-    const newData = data.map((row: any) => {
+  const handleEdit = (id, field, newValue) => {
+    const newData = data.map((row) => {
       if (row.id === id) {
         return { ...row, [field]: newValue };
       }
@@ -64,68 +16,76 @@ const EditTable: React.FC<EditTableProps> = ({ data, setData }) => {
     setData(newData);
   };
 
-  const handleDelete = (id: string) => {
-    const newData = data.filter((row: any) => row.id !== id);
+  const handleDelete = (id) => {
+    const newData = data.filter((row) => row.id !== id);
     setData(newData);
   };
 
   return (
-    <TableContainer>
-      <h2 style={{ textAlign: 'center' }}>Edit Table</h2>
-      <Table>
-        <TableHeader>
+    <div className="w-full border border-gray-300 p-4 rounded shadow-md bg-white">
+      <h2 className="text-center text-xl font-semibold">Edit Table</h2>
+      <table className="w-full border-collapse">
+        <thead className="bg-black text-white">
           <tr>
-            <th>ID</th>
-            <th>Active</th>
-            <th>Tilt</th>
-            <th>Capacity</th>
-            <th>Model</th>
-            <th>Action</th>
+            <th className="p-2">ID</th>
+            <th className="p-2">Active</th>
+            <th className="p-2">Tilt</th>
+            <th className="p-2">Capacity</th>
+            <th className="p-2">Model</th>
+            <th className="p-2">Action</th>
           </tr>
-        </TableHeader>
+        </thead>
         <tbody>
-          {data.map((row: any) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.id}</TableCell>
-              <TableCell>
+          {data.map((row) => (
+            <tr key={row.id} className={row.id % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
+              <td className="p-2">{row.id}</td>
+              <td className="p-2">
                 <input
                   type="checkbox"
                   checked={row.isActive}
                   onChange={(e) => handleEdit(row.id, 'isActive', e.target.checked)}
                 />
-              </TableCell>
-              <TableCell>
+              </td>
+              <td className="p-2">
                 <input
                   type="number"
                   value={row.tilt}
                   onChange={(e) => handleEdit(row.id, 'tilt', parseFloat(e.target.value))}
                 />
-              </TableCell>
-              <TableCell>
+              </td>
+              <td className="p-2">
                 <input
                   type="number"
                   value={row.capacity}
                   onChange={(e) => handleEdit(row.id, 'capacity', parseFloat(e.target.value))}
                 />
-              </TableCell>
-              <TableCell>
+              </td>
+              <td className="p-2">
                 <input
                   type="text"
                   value={row.model}
                   onChange={(e) => handleEdit(row.id, 'model', e.target.value)}
                 />
-              </TableCell>
-              <TableCell>
-                <EditButton onClick={() => handleEdit(row.id, 'isActive', !row.isActive)}>
+              </td>
+              <td className="p-2">
+                <button
+                  className="bg-gray-700 text-white border-none p-1 px-2 mr-2 cursor-pointer"
+                  onClick={() => handleEdit(row.id, 'isActive', !row.isActive)}
+                >
                   Toggle Active
-                </EditButton>
-                <EditButton onClick={() => handleDelete(row.id)}>Delete</EditButton>
-              </TableCell>
-            </TableRow>
+                </button>
+                <button
+                  className="bg-gray-700 text-white border-none p-1 px-2 cursor-pointer"
+                  onClick={() => handleDelete(row.id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
           ))}
         </tbody>
-      </Table>
-    </TableContainer>
+      </table>
+    </div>
   );
 };
 

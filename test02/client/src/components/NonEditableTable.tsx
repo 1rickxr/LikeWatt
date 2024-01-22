@@ -1,76 +1,39 @@
-// src/components/NonEditableTable.tsx
 import React from 'react';
-import styled from 'styled-components';
 
-
-const TableContainer = styled.div`
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: red;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TableHeader = styled.thead`
-  background-color: black;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: grey;
-  }
-`;
-
-
-const TableCell = styled.td`
-  padding: 5px; /* Reduced padding */
-  border: 1px solid #ddd;
-  text-align: center;
-  font-size: 14px; /* Reduced font size */
-`;
-
-interface NonEditableTableProps {
-  data: any[];
-}
-
-const NonEditableTable: React.FC<NonEditableTableProps> = ({ data }) => {
+const NonEditableTable = ({ data }) => {
   if (!Array.isArray(data)) {
     console.error('data is not an array:', data);
     return <div>No data to display.</div>;
   }
 
   return (
-    <TableContainer>
-      <h2 style={{ textAlign: 'center' }}>Non-Editable Table</h2>
-      <Table>
-        <TableHeader>
+    <div className="w-1/2 border border-gray-300 p-4 rounded shadow-md bg-white">
+    <div className="w-1/2 border border-gray-300 p-4 rounded shadow-md bg-white">
+      <h2 className="text-center text-xl font-semibold">Non-Editable Table</h2>
+      <table className="w-full border-collapse">
+        <thead className="bg-black text-white">
           <tr>
-            <th>ID</th>
-            <th>Active</th>
-            <th>Tilt</th>
-            <th>Capacity</th>
-            <th>Model</th>
+            <th className="p-2">ID</th>
+            <th className="p-2">Active</th>
+            <th className="p-2">Tilt</th>
+            <th className="p-2">Capacity</th>
+            <th className="p-2">Model</th>
           </tr>
-        </TableHeader>
+        </thead>
         <tbody>
-          {data.map((row: any) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.id}</TableCell>
-              <TableCell>{row.isActive ? 'Active' : 'Inactive'}</TableCell>
-              <TableCell>{row.tilt}</TableCell>
-              <TableCell>{row.capacity}</TableCell>
-              <TableCell>{row.model}</TableCell>
-            </TableRow>
+          {data.map((row) => (
+            <tr key={row.id} className={row.id % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
+              <td className="p-2">{row.id}</td>
+              <td className="p-2">{row.isActive ? 'Active' : 'Inactive'}</td>
+              <td className="p-2">{row.tilt}</td>
+              <td className="p-2">{row.capacity}</td>
+              <td className="p-2">{row.model}</td>
+            </tr>
           ))}
         </tbody>
-      </Table>
-    </TableContainer>
+      </table>
+    </div>
+    </div>
   );
 };
 
