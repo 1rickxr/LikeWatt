@@ -19,9 +19,9 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap">
-      <div className="w-1/2 p-6">
-        <NonEditableTable data={data} />
+    <div className="flex">
+      <div className="w-1/2 p-6 bg-black">
+        <NonEditableTable data={data} arraySize={undefined} />
       </div>
       <div className="w-1/2 p-6">
         <EditTable data={data} setData={setData} />
