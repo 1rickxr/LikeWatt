@@ -1,17 +1,68 @@
 import React from 'react';
+import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { v4 as uuidv4 } from 'uuid';
+
+const StyledTableContainer = styled.div`
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 4px;
+  border-color: #003b58;
+`;
+
+const StyledTable = styled.table`
+  border-collapse: collapse;
+`;
+
+const StyledTh = styled.th`
+  padding: 0.5rem;
+  border: 2px solid #003b58;
+  background-color: #003b58;
+  color: #fff;
+  text-align: left;
+`;
+
+const StyledTd = styled.td`
+  padding: 0.5rem;
+  border: 2px solid #003b58;
+
+  &:nth-child(2) {
+    width: 80px;
+  }
+  &:nth-child(3) {
+    width: 80px;
+  }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    border-radius: 5px;
+    border-bottom: 3px solid #003b58;
+  }
+`;
+
+const StyledButton = styled.button`
+  padding: 6px 12px;
+  border-radius: 15px;
+  background-color: #e8e8e8;
+  font-weight: 1000;
+  font-size: 17px;
+  transition: all 250ms;
+  color: #003b58;
+`;
 
 const EditTable = ({ data, setData }) => {
-  const arraySize = data.length;
-
   const handleEdit = (id, field, newValue) => {
+    let sanitizedValue = newValue;
     const newData = data.map((row) => {
       if (row.id === id) {
-        return { ...row, [field]: newValue };
+        return { ...row, [field]: sanitizedValue };
       }
       return row;
     });
+
     setData(newData);
   };
 
@@ -20,72 +71,99 @@ const EditTable = ({ data, setData }) => {
     setData(newData);
   };
 
+  const handleAdd = () => {
+    const newId = uuidv4();
+    const tiltInput = document.getElementById('tilt-input') as HTMLInputElement;
+    const capacityInput = document.getElementById('capacity-input') as HTMLInputElement;
+    const modelInput = document.getElementById('model-input') as HTMLInputElement;
+
+    const newRow = {
+      id: newId,
+      isActive: false,
+      tilt: parseFloat(tiltInput.value),
+      capacity: parseFloat(capacityInput.value),
+      model: modelInput.value,
+    };
+
+    setData((prevData) => [...prevData, newRow]);
+  };
+
   return (
-    <div className={`w-${arraySize > 0 ? `${arraySize + 1}/12` : 'full'} border-3 border-black p-4 rounded shadow-md bg-white border-opacity-100 border-opacity-100`} style={{ border: '3px solid black', borderRadius: '10px', width: 'fit-content' }}>
-      <h2 className="bg-red-400">Edit Table</h2>
-      <table>
-        <thead className="bg-black text-white">
+    <StyledTableContainer className="p-4">
+      <StyledTable>
+        <thead>
           <tr>
-            <th className="p-2">ID</th>
-            <th className="p-2">Active</th>
-            <th className="p-2">Tilt</th>
-            <th className="p-2">Capacity</th>
-            <th className="p-2">Model</th>
-            <th className="p-2">Action</th>
+            <StyledTh>Active</StyledTh>
+            <StyledTh>Tilt</StyledTh>
+            <StyledTh>Capacity</StyledTh>
+            <StyledTh>Model</StyledTh>
+            <StyledTh>Action</StyledTh>
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
-            <tr key={row.id} className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
-              <td className="p-2">{row.id}</td>
-              <td className="p-2">
+          {data.map((row) => (
+            <tr key={row.id} className={row.id % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
+              <StyledTd>
                 <input
+                  title="Active"
                   type="checkbox"
                   checked={row.isActive}
                   onChange={(e) => handleEdit(row.id, 'isActive', e.target.checked)}
                 />
-              </td>
-              <td className="p-2">
+              </StyledTd>
+              <StyledTd>
                 <input
+                  title="Tilt"
                   type="number"
+                  max={180}
+                  min={0}
                   value={row.tilt}
                   onChange={(e) => handleEdit(row.id, 'tilt', parseFloat(e.target.value))}
                 />
-              </td>
-              <td className="p-2">
+              </StyledTd>
+              <StyledTd>
                 <input
+                  title="Capacity"
                   type="number"
                   value={row.capacity}
                   onChange={(e) => handleEdit(row.id, 'capacity', parseFloat(e.target.value))}
                 />
-              </td>
-              <td className="p-2">
+              </StyledTd>
+              <StyledTd>
                 <input
+                  title="Model"
                   type="text"
                   value={row.model}
                   onChange={(e) => handleEdit(row.id, 'model', e.target.value)}
                 />
-              </td>
-              <td className="p-2">
-                <button
-                  className="relative overflow-hidden px-6 py-3 rounded-full bg-gray-200 text-gray-900 font-semibold text-lg transition-all duration-250 hover:text-white hover:bg-gray-800 hover:before:w-full"
-                  onClick={() => handleEdit(row.id, 'isActive', !row.isActive)}
-                >
-                  Save
-                  <span className="absolute top-0 left-0 h-full bg-gray-800 w-0 before:w-full"></span>
-                </button>
-                <button
-                  className="relative overflow-hidden px-6 py-3 rounded-full bg-red-700 text-white font-semibold text-lg transition-all duration-250 hover:bg-red-800"
-                  onClick={() => handleDelete(row.id)}
-                >
+              </StyledTd>
+              <StyledTd>
+                <StyledButton onClick={() => handleDelete(row.id)}>
                   <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </td>
+                </StyledButton>
+              </StyledTd>
             </tr>
           ))}
+          <tr>
+            <StyledTd>
+              <input id="active-input" defaultChecked={true} type="checkbox" placeholder="Active" />
+            </StyledTd>
+            <StyledTd>
+              <input max={180} min={0} defaultValue={0} id="tilt-input" type="number" placeholder="Tilt" />
+            </StyledTd>
+            <StyledTd>
+              <input id="capacity-input" defaultValue={0} type="number" placeholder="Capacity" />
+            </StyledTd>
+            <StyledTd>
+              <input id="model-input" type="text" placeholder="Model" />
+            </StyledTd>
+            <StyledTd>
+              <StyledButton onClick={handleAdd}>Add</StyledButton>
+            </StyledTd>
+          </tr>
         </tbody>
-      </table>
-    </div>
+      </StyledTable>
+    </StyledTableContainer>
   );
 };
 

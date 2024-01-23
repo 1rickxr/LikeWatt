@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import NonEditableTable from './components/NonEditableTable';
 import EditTable from './components/EditTable';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-const App: React.FC = () => {
-  const [data, setData] = useState<any[]>([]); // Replace 'any' with your data type
+const BodyWrapper = styled.div`
+`;
+
+const AppContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap;
+`;
+
+
+
+const App = () => {
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    // Fetch data from the API and populate the state
     const API_URL = 'https://apitest.likewatt-infra.com/entry-test/2';
     fetch(API_URL)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.data); // Assuming the data is under the 'data' key
+        setData(data.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -19,14 +33,14 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex">
-      <div className="w-1/2 p-6 bg-black">
-        <NonEditableTable data={data} arraySize={undefined} />
-      </div>
-      <div className="w-1/2 p-6">
-        <EditTable data={data} setData={setData} />
-      </div>
-    </div>
+    <BodyWrapper>
+      <Header title="Likewatt" />
+      <AppContainer>
+          <NonEditableTable data={data} arraySize={undefined} />
+          <EditTable data={data} setData={setData} />
+      </AppContainer>
+      <Footer title="Likewatt" />
+    </BodyWrapper>
   );
 };
 
