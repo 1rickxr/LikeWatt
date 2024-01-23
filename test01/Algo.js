@@ -43,7 +43,8 @@ function filterData(array) {
 		...objectData,
 		...arrayData,
 	];
-	console.log("🚀 ~ filterData ~ result:", result);
+	console.log(result);
+    return result;
 }
 
 main();
