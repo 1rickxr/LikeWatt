@@ -20,6 +20,13 @@ const StyledTh = styled.th`
   color: #fff;
   text-align: left;
 `;
+const StyledTr = styled.tr<{isActive?: boolean}>`
+  padding: 0.5rem;
+  border: 2px solid #003b58;
+  background-color: ${({ isActive }) => isActive ? '#9ebe5aab' : '#cd000070'};
+  color: black;
+  text-align: left;
+`;
 
 const StyledTd = styled.td`
   padding: 0.5rem;
@@ -46,13 +53,15 @@ const NonEditableTable = ({ data, arraySize }) => {
         </thead>
         <tbody>
           {data.map((row) => (
-            <tr key={row.id} className={row.id % 2 === 0 ? 'bg-gray-200' : 'bg-gray-300'}>
+            <StyledTr isActive={row.isActive} key={row.id} >
               <StyledTd>{row.id}</StyledTd>
-              <StyledTd>{row.isActive ? 'Active' : 'Inactive'}</StyledTd>
+              <StyledTd>
+                {row.isActive ? 'Active' : 'Inactive'}
+              </StyledTd>
               <StyledTd>{row.tilt}</StyledTd>
               <StyledTd>{row.capacity}</StyledTd>
               <StyledTd>{row.model}</StyledTd>
-            </tr>
+            </StyledTr>
           ))}
         </tbody>
       </StyledTable>

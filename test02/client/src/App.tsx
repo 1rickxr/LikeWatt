@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NonEditableTable from './components/NonEditableTable';
 import EditTable from './components/EditTable';
 import Header from './components/Header';
-import Footer from './components/Footer';
 
 const BodyWrapper = styled.div`
 `;
@@ -34,12 +33,11 @@ const App = () => {
 
   return (
     <BodyWrapper>
-      <Header title="Likewatt" />
+      <Header />
       <AppContainer>
           <NonEditableTable data={data} arraySize={undefined} />
           <EditTable data={data} setData={setData} />
       </AppContainer>
-      <Footer title="Likewatt" />
     </BodyWrapper>
   );
 };

@@ -33,9 +33,15 @@ const StyledTd = styled.td`
   &:nth-child(3) {
     width: 80px;
   }
-
-  input {
+  
+  input[type='checkbox'] {
+    margin: 0 auto;
     width: 100%;
+  }
+
+  input:not([type='checkbox']) {
+    width: 100%;
+    display: flex;
     box-sizing: border-box;
     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     border-radius: 5px;
@@ -44,13 +50,14 @@ const StyledTd = styled.td`
 `;
 
 const StyledButton = styled.button`
-  padding: 6px 12px;
-  border-radius: 15px;
-  background-color: #e8e8e8;
-  font-weight: 1000;
-  font-size: 17px;
-  transition: all 250ms;
+  border: none;
+  font-size: 1.2rem;
   color: #003b58;
+  margin: auto;
+  width: 100%;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const EditTable = ({ data, setData }) => {
@@ -138,8 +145,8 @@ const EditTable = ({ data, setData }) => {
                 />
               </StyledTd>
               <StyledTd>
-                <StyledButton onClick={() => handleDelete(row.id)}>
-                  <FontAwesomeIcon icon={faTrash} />
+                <StyledButton>
+                  <FontAwesomeIcon onClick={() => handleDelete(row.id)} icon={faTrash} />
                 </StyledButton>
               </StyledTd>
             </tr>
