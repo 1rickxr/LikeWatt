@@ -38,10 +38,10 @@ Les nombres sont triés par ordre décroissant.
 
 ## Explication 
 
- - `getData(url)`
+  `getData(url)`
 Cette fonction asynchrone utilise l'API fetch pour effectuer une requête vers l'URL spécifiée. Elle analyse ensuite la réponse au format JSON et retourne la propriété 'data' de la réponse JSON. Toutes les erreurs survenues au cours du processus sont capturées et enregistrées dans la console.
 
-- `filterData(array)`
+ `filterData(array)`
 Cette fonction prend un tableau en entrée et effectue les opérations suivantes :
 Filtre le tableau en fonction du type spécifié ('string', 'number', 'object', 'array').
 - Trie les chaînes de caractères par ordre alphabétique.
@@ -49,7 +49,7 @@ Filtre le tableau en fonction du type spécifié ('string', 'number', 'object', 
 - Sépare les chaînes de caractères d'une seule lettre, les chaînes de caractères multi-lettres, les nombres, les objets et les tableaux dans des tableaux distincts.
 - Combine les tableaux triés
 
-- `main`
+ `main`
 La fonction principale est une fonction asynchrone qui appelle getData pour récupérer des données à partir de l'URL spécifiée, puis appelle filterData sur les données récupérées.
 ## Exécution du script 
 
