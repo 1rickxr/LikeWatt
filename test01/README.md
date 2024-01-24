@@ -35,15 +35,6 @@ Les nombres sont triés par ordre décroissant.
 
 **5- Les objets** Affichage des objets
 
-**Séparation des éléments :**
-Les éléments du tableau sont séparés en cinq tableaux distincts :
-- Tableau pour les chaînes de caractères d'une seule lettre.
-- Tableau pour les chaînes de caractères multi-lettres.
-- Tableau pour les nombres.
-- Tableau pour les objets.
-- Tableau pour les tableaux.
-
-
 
 ## Explication 
 
@@ -52,12 +43,11 @@ Cette fonction asynchrone utilise l'API fetch pour effectuer une requête vers l
 
 - `filterData(array)`
 Cette fonction prend un tableau en entrée et effectue les opérations suivantes :
-
 Filtre le tableau en fonction du type spécifié ('string', 'number', 'object', 'array').
-Trie les chaînes de caractères par ordre alphabétique.
-Trie les nombres par ordre décroissant.
-Sépare les chaînes de caractères d'une seule lettre, les chaînes de caractères multi-lettres, les nombres, les objets et les tableaux dans des tableaux distincts.
-Combine les tableaux triés
+- Trie les chaînes de caractères par ordre alphabétique.
+- Trie les nombres par ordre décroissant.
+- Sépare les chaînes de caractères d'une seule lettre, les chaînes de caractères multi-lettres, les nombres, les objets et les tableaux dans des tableaux distincts.
+- Combine les tableaux triés
 
 - `main`
 La fonction principale est une fonction asynchrone qui appelle getData pour récupérer des données à partir de l'URL spécifiée, puis appelle filterData sur les données récupérées.
