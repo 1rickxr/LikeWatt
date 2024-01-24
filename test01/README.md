@@ -34,11 +34,11 @@ Triage des chaînes de caractères :
 - Séparation des éléments :
 Les éléments du tableau sont séparés en cinq tableaux distincts :
   -
-  Tableau pour les chaînes de caractères d'une seule lettre.
-  Tableau pour les chaînes de caractères multi-lettres.
-  Tableau pour les nombres.
-  Tableau pour les objets.
-  Tableau pour les tableaux.
+Tableau pour les chaînes de caractères d'une seule lettre.
+Tableau pour les chaînes de caractères multi-lettres.
+Tableau pour les nombres.
+Tableau pour les objets.
+Tableau pour les tableaux.
 
 
 
