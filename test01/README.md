@@ -19,9 +19,7 @@ L'objectif de ce script est de récupérer des données depuis une URL spécifi�
 ```
 
 
-## Etapes 
-
-Étapes
+## Étapes
 
 **1- Filtrage par type** :
 Le tableau initial est filtré en fonction du type spécifié ('string', 'number', 'object', 'array').
