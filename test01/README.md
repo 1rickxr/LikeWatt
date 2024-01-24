@@ -19,6 +19,30 @@ L'objectif de ce script est de récupérer des données depuis une URL spécifi�
 ```
 
 
+## Etapes 
+
+Étapes
+Filtrage par type :
+
+Le tableau initial est filtré en fonction du type spécifié ('string', 'number', 'object', 'array').
+Triage des chaînes de caractères :
+
+ - Les chaînes de caractères sont triées par ordre alphabétique.
+
+- Triage des nombres : Les nombres sont triés par ordre décroissant.
+
+- Séparation des éléments :
+Les éléments du tableau sont séparés en cinq tableaux distincts :
+ -
+ Tableau pour les chaînes de caractères d'une seule lettre.
+Tableau pour les chaînes de caractères multi-lettres.
+Tableau pour les nombres.
+Tableau pour les objets.
+Tableau pour les tableaux.
+Combinaison des tableaux triés :
+
+
+
 ## Explication 
 
  - `getData(url)`
