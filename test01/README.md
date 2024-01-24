@@ -34,7 +34,6 @@ Les nombres sont triés par ordre décroissant.
 **4- Les tableaux** Affichage des tableaux
 
 **5- Les objets** Affichage des objets
-----------------
 
 ## Explication 
 
