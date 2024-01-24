@@ -62,10 +62,7 @@ Pour déployer ce projet, exécutez
 
 
 
-
-
-
-
+-----------------
 
 # Test Technique LikeWatt - Partie 2
 
