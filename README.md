@@ -9,7 +9,6 @@ L'objectif de ce script est de récupérer des données depuis une URL spécifi�
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 
-
 ## API Réference
 
 #### Get all items
